@@ -67,24 +67,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 SizedBox(height: 20),
 
-                // Dropdown Menu for Account Type
-                DropdownButtonFormField<String>(
-                  value: 'Car',
-                  items: [
-                    DropdownMenuItem(value: 'Car', child: Text('Car')),
-                    DropdownMenuItem(
-                        value: 'Charging Station',
-                        child: Text('Charging Station')),
-                  ],
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    labelText: 'Account Type',
-                    labelStyle: TextStyle(color: Colors.green[800]),
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 20),
-
                 // Sign Up Button
                 ElevatedButton(
                   onPressed: () {
