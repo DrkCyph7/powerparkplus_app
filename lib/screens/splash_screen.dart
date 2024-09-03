@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Image.asset('assets/images/logo.png', width: 200, height: 200),
             SizedBox(height: 20),
             Text(
-              'PowerPark Plus',
+              '',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ],
