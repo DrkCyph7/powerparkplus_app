@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'signup_screen.dart'; // Correct path to your SignupScreen
-import 'home_screen.dart'; // Correct path to your HomeScreen
+import 'home_screen.dart'; // Ensure this path is correct
 
-class LoginScreen extends StatefulWidget {
+class SignupScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +23,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Image.asset(
                     'assets/images/text-logo.png', // Replace with your logo path
                     height: 100,
+                  ),
+                ),
+                SizedBox(height: 20),
+
+                // Name TextField
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: TextStyle(color: Colors.green[800]),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green![800]!),
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -55,7 +67,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20),
 
-                // Login Button
+                // Dropdown Menu for Account Type
+                DropdownButtonFormField<String>(
+                  value: 'Car',
+                  items: [
+                    DropdownMenuItem(value: 'Car', child: Text('Car')),
+                    DropdownMenuItem(
+                        value: 'Charging Station',
+                        child: Text('Charging Station')),
+                  ],
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    labelText: 'Account Type',
+                    labelStyle: TextStyle(color: Colors.green[800]),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 20),
+
+                // Sign Up Button
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -68,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.symmetric(vertical: 15),
                   ),
                   child: Text(
-                    'Login',
+                    'Sign Up',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors
@@ -78,58 +108,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20),
 
-                // Login with Google Button
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement Google login functionality
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.red[700], // Background color for Google button
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                  ),
-                  child: Text(
-                    'Login with Google',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors
-                          .white, // Text color set to white for visibility
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Login with Facebook Button
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement Facebook login functionality
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors
-                        .blue[700], // Background color for Facebook button
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                  ),
-                  child: Text(
-                    'Login with Facebook',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors
-                          .white, // Text color set to white for visibility
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Create Account Button
+                // Back to Login Button
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignupScreen()),
-                    );
+                    Navigator.pop(context);
                   },
                   child: Text(
-                    'Create Account',
+                    'Back to Login',
                     style: TextStyle(
                       color: Colors.green[700],
                       fontSize: 16,
