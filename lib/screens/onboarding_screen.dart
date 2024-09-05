@@ -11,8 +11,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   void _nextPage() {
-    if (_currentPage < 1) {
-      // Adjusted for two pages
+    if (_currentPage < 2) {
       _pageController.nextPage(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -48,12 +47,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
             children: <Widget>[
               _buildPage(
+                'assets/images/slide2.png',
+                'Experience the best and the fastest ev chargers with maximum freedom and comfort.',
+                textPositionFromBottom: 100.0, // First image: move text up
+              ),
+              _buildPage(
                 'assets/images/slide3.png',
-                'Barrior based parking systems installed for further refined, best quality experience.',
+                'Barrier based parking systems installed for further refined, best quality experience.',
+                textPositionFromTop:
+                    150.0, // Second image: move text down from the top
               ),
               _buildPage(
                 'assets/images/slide4.png',
                 'Find nearby EV chargers with ease.',
+                textPositionFromBottom: 100.0, // Third image: move text up
               ),
             ],
           ),
@@ -64,7 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ? ElevatedButton(
                     onPressed: _previousPage,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[800], // Background color
+                      backgroundColor: Colors.grey[800],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -76,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.white, // Text color
+                        color: Colors.white,
                       ),
                     ),
                   )
@@ -88,18 +95,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: ElevatedButton(
               onPressed: _nextPage,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[700], // Background color
+                backgroundColor: Colors.green[700],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               child: Text(
-                _currentPage == 1 ? 'Get Started' : 'Next',
+                _currentPage == 2 ? 'Get Started' : 'Next',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: Colors.white, // Text color
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -109,27 +116,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildPage(String imagePath, String text) {
+  Widget _buildPage(String imagePath, String text,
+      {double textPositionFromTop = 50.0, double? textPositionFromBottom}) {
     return Stack(
       children: [
-        Center(
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+        Image.asset(
+          imagePath,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
         ),
         Positioned(
-          top: 40.0,
+          top: textPositionFromBottom == null ? textPositionFromTop : null,
+          bottom: textPositionFromBottom,
           left: 20.0,
           right: 20.0,
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 24.0,
+              fontWeight: FontWeight.normal,
               color: Colors.white,
-              fontFamily: 'ModernFont', // Use a modern font
+              fontFamily: 'Trajan', // Use Trajan Pro Regular font
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black.withOpacity(0.5),
+                  offset: Offset(2.0, 2.0),
+                ),
+              ],
             ),
             textAlign: TextAlign.center,
           ),
