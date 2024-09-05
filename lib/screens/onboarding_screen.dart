@@ -11,8 +11,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   void _nextPage() {
-    if (_currentPage < 2) {
-      // Adjusted for three pages
+    if (_currentPage < 1) {
+      // Adjusted for two pages
       _pageController.nextPage(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -47,9 +47,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
             children: <Widget>[
-              _buildPage('assets/images/slide2.png'),
-              _buildPage('assets/images/slide3.png'),
-              _buildPage('assets/images/slide4.png'),
+              _buildPage(
+                'assets/images/slide3.png',
+                'Barrior based parking systems installed for further refined, best quality experience.',
+              ),
+              _buildPage(
+                'assets/images/slide4.png',
+                'Find nearby EV chargers with ease.',
+              ),
             ],
           ),
           Positioned(
@@ -90,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               child: Text(
-                _currentPage == 2 ? 'Get Started' : 'Next',
+                _currentPage == 1 ? 'Get Started' : 'Next',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -104,14 +109,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildPage(String imagePath) {
-    return Center(
-      child: Image.asset(
-        imagePath,
-        fit: BoxFit.cover, // Ensures the image fits the display
-        width: double.infinity,
-        height: double.infinity,
-      ),
+  Widget _buildPage(String imagePath, String text) {
+    return Stack(
+      children: [
+        Center(
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+        Positioned(
+          top: 40.0,
+          left: 20.0,
+          right: 20.0,
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 24,
+              color: Colors.white,
+              fontFamily: 'ModernFont', // Use a modern font
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }
