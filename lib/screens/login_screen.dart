@@ -85,32 +85,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        Colors.red[700], // Background color for Google button
+                        Colors.green[700], // Same green color as Login button
                     padding: EdgeInsets.symmetric(vertical: 15),
                   ),
                   child: Text(
                     'Login with Google',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors
-                          .white, // Text color set to white for visibility
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Login with Facebook Button
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement Facebook login functionality
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors
-                        .blue[700], // Background color for Facebook button
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                  ),
-                  child: Text(
-                    'Login with Facebook',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors
