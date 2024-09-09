@@ -1,7 +1,46 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'qr_scanner_page.dart'; // Import the QR Scanner Page
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoSlide();
+  }
+
+  void _startAutoSlide() {
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (_currentPage < 3) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+
+      _pageController.animateToPage(
+        _currentPage,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +55,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/icons/app_icon.png', // Replace with your app logo path
-                  height: 40,
+                  height: 50,
                 ),
                 SizedBox(width: 8),
                 Text(
@@ -28,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             Text(
               'Welcome to PowerPark Plus',
               style: TextStyle(
@@ -39,24 +78,39 @@ class HomeScreen extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.width *
                   0.5, // Set the height to 50% of the width
-              child: PageView(
+              child: Stack(
                 children: [
-                  AspectRatio(
-                    aspectRatio:
-                        2.0, // 2:1 aspect ratio (width is 2 times height)
-                    child: Image.asset('assets/slider1.png', fit: BoxFit.cover),
+                  PageView(
+                    controller: _pageController,
+                    onPageChanged: (int page) {
+                      setState(() {
+                        _currentPage = page;
+                      });
+                    },
+                    children: [
+                      _buildImageContainer('assets/slider_images/slider1.png'),
+                      _buildImageContainer('assets/slider_images/slider2.png'),
+                      _buildImageContainer('assets/slider_images/slider3.png'),
+                      _buildImageContainer('assets/slider_images/slider4.png'),
+                    ],
                   ),
-                  AspectRatio(
-                    aspectRatio: 2.0,
-                    child: Image.asset('assets/slider2.png', fit: BoxFit.cover),
-                  ),
-                  AspectRatio(
-                    aspectRatio: 2.0,
-                    child: Image.asset('assets/slider3.png', fit: BoxFit.cover),
-                  ),
-                  AspectRatio(
-                    aspectRatio: 2.0,
-                    child: Image.asset('assets/slider4.png', fit: BoxFit.cover),
+                  Positioned(
+                    bottom: 10,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: DotsIndicator(
+                        dotsCount: 4,
+                        position: _currentPage,
+                        decorator: DotsDecorator(
+                          color: Colors.grey, // Inactive dot color
+                          activeColor: Colors.blue, // Active dot color
+                          size: Size(8, 8),
+                          activeSize: Size(12, 8),
+                          spacing: EdgeInsets.symmetric(horizontal: 4),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -73,22 +127,22 @@ class HomeScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.green[700], // Green 700 color
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Scan Now',
+                      'Charge your EV',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 23,
                         color: Colors.white,
                       ),
                     ),
                     Image.asset(
-                      'assets/scan_icon.png', // Replace with your icon path
-                      height: 24,
+                      'assets/icons/scan_icon.png', // Replace with your icon path
+                      height: 54,
                       color: Colors.white,
                     ),
                   ],
@@ -100,4 +154,78 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildImageContainer(String assetPath) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          assetPath,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class DotsIndicator extends StatelessWidget {
+  final int dotsCount;
+  final int position;
+  final DotsDecorator decorator;
+
+  DotsIndicator({
+    required this.dotsCount,
+    required this.position,
+    required this.decorator,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(
+        dotsCount,
+        (index) => Container(
+          margin: decorator.spacing,
+          width: index == position
+              ? decorator.activeSize.width
+              : decorator.size.width,
+          height: index == position
+              ? decorator.activeSize.height
+              : decorator.size.height,
+          decoration: BoxDecoration(
+            color: index == position ? decorator.activeColor : decorator.color,
+            shape: BoxShape.circle,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DotsDecorator {
+  final Color color;
+  final Color activeColor;
+  final Size size;
+  final Size activeSize;
+  final EdgeInsetsGeometry spacing;
+
+  DotsDecorator({
+    required this.color,
+    required this.activeColor,
+    required this.size,
+    required this.activeSize,
+    required this.spacing,
+  });
 }
