@@ -36,47 +36,8 @@ Before setting up, make sure you have the following installed:
    ```bash
    git clone https://github.com/your-username/powerparkplus_app.git
 
-    Navigate to the Project Directory:
-
-    bash
-
-cd powerparkplus_app
-
-Install Dependencies: Run the following command to install required Flutter packages:
-
-bash
-
-flutter pub get
-
-Run the App: Start the app on your connected device or emulator:
-
-bash
-
-    flutter run
-
-🛠️ Usage
-
-Once installed, the home screen provides the following options:
-
-    Connect Charger: Tap to scan the charger’s QR code and start the charging process.
-    Charging Status: Monitor the charging status of your car in real-time.
-    Find Stations: Discover nearby charging stations and get directions.
-    Sliding Gallery: Explore images of charging station features through an automatic slider. The slider updates every 5 seconds, with a dot indicator showing the current image.
-
-🎨 Design Features
-
-    Hello, RexZeal: The greeting text at the top of the home screen with an app logo integrated into the greeting.
-    Welcome to PowerParkPlus: The introduction to the app placed directly below the greeting.
-    Automatic Sliding Images: A gallery of four rotating images that update every 5 seconds in an infinite loop.
-        Dot Indicators: Dots below the slider indicate the current image, with the active dot highlighted.
-    Scan Now Tile: A full-width button below the slider with rounded edges, green color (green700), and a small PNG icon at the corner.
-    3D Tile Design: Rounded edges and subtle shadow effects create a 3D-like appearance for the tiles, adding depth to the UI.
-    Responsive Design: Optimized for both mobile and larger screens.
-
 📂 Folder Structure
-
-bash
-
+```
 powerparkplus_app/
 │
 ├── assets/                   # App resources like images and icons
@@ -90,37 +51,24 @@ powerparkplus_app/
 │   └── main.dart             # App entry point
 │
 └── README.md                 # Documentation file
+```
 
 🌐 Technologies Used
 
-    Flutter: Front-end framework for building natively compiled applications for mobile.
-    Dart: Programming language used for Flutter.
-    State Management: Efficient state handling using setState and PageController.
-    Responsive UI: The app adapts to different screen sizes, ensuring a seamless experience on mobile devices.
-    Custom Animations: Smooth transitions, automatic image slider, and interactive widgets for better user experience.
-    Icons and Assets: Beautiful custom icons and images to enhance the UI.
+Flutter: Front-end framework for building natively compiled applications for mobile.
+Dart: Programming language used for Flutter.
+State Management: Efficient state handling using setState and PageController.
+Responsive UI: The app adapts to different screen sizes, ensuring a seamless experience on mobile devices.
+Custom Animations: Smooth transitions, automatic image slider, and interactive widgets for better user experience.
+Icons and Assets: Beautiful custom icons and images to enhance the UI.
 
 🤝 Contributing
 
-Contributions are always welcome! Here's how you can contribute:
-
-    Fork the repository.
-    Create a new branch: git checkout -b feature-name.
-    Make your changes and commit them: git commit -m 'Added some feature'.
-    Push to the branch: git push origin feature-name.
-    Open a pull request for review.
-
-📄 License
-
-This project is licensed under the MIT License. Feel free to use and modify the code.
-🙌 Acknowledgements
-
-    Flutter for providing an excellent framework to build cross-platform apps.
-    Special thanks to all contributors and testers for their invaluable support.
-
-PowerParkPlus App - Bringing a smarter charging experience to every electric vehicle owner!
-
-markdown
+Fork the repository.
+Create a new branch: git checkout -b feature-name.
+Make your changes and commit them: git commit -m 'Added some feature'.
+Push to the branch: git push origin feature-name.
+Open a pull request for review.
 
 
 ### Key Highlights:
