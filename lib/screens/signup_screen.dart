@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart'; // Ensure this path is correct
 
 class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
@@ -13,7 +15,7 @@ class _SignupScreenState extends State<SignupScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -25,33 +27,33 @@ class _SignupScreenState extends State<SignupScreen> {
                     height: 100,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Name TextField
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: TextStyle(color: Colors.green[800]),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green![800]!),
+                      borderSide: BorderSide(color: Colors.green[800]!),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Email TextField
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Email',
                     labelStyle: TextStyle(color: Colors.green[800]),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green![800]!),
+                      borderSide: BorderSide(color: Colors.green[800]!),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Password TextField
                 TextField(
@@ -59,13 +61,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: TextStyle(color: Colors.green[800]),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green![800]!),
+                      borderSide: BorderSide(color: Colors.green[800]!),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Sign Up Button
                 ElevatedButton(
@@ -77,9 +79,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700], // Background color
-                    padding: EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Sign Up',
                     style: TextStyle(
                       fontSize: 18,
@@ -88,7 +90,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Back to Login Button
                 TextButton(

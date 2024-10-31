@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'onboarding_screen.dart'; // Import the OnboardingScreen
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -12,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Start the timer for 2 seconds
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       // After 2 seconds, navigate to the OnboardingScreen
       Navigator.pushReplacement(
         context,
@@ -30,8 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             // Add your logo image here
             Image.asset('assets/images/logo.png', width: 200, height: 200),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               '',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),

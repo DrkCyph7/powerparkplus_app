@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart'; // Ensure this path is correct
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
   void _nextPage() {
     if (_currentPage < 2) {
       _pageController.nextPage(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
@@ -27,7 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _previousPage() {
     if (_currentPage > 0) {
       _pageController.previousPage(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     }
@@ -76,9 +78,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Previous',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -87,7 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           ),
           Positioned(
             bottom: 20.0,
@@ -99,11 +101,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               child: Text(
                 _currentPage == 2 ? 'Get Started' : 'Next',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                   color: Colors.white,
@@ -142,7 +144,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Shadow(
                   blurRadius: 10.0,
                   color: Colors.black.withOpacity(0.5),
-                  offset: Offset(2.0, 2.0),
+                  offset: const Offset(2.0, 2.0),
                 ),
               ],
             ),

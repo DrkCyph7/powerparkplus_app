@@ -3,6 +3,8 @@ import 'signup_screen.dart'; // Correct path to your SignupScreen
 import 'home_screen.dart'; // Correct path to your HomeScreen
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -14,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -26,20 +28,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 100,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Email TextField
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Email',
                     labelStyle: TextStyle(color: Colors.green[800]),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green![800]!),
+                      borderSide: BorderSide(color: Colors.green[800]!),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Password TextField
                 TextField(
@@ -47,13 +49,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: TextStyle(color: Colors.green[800]),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green![800]!),
+                      borderSide: BorderSide(color: Colors.green[800]!),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Login Button
                 ElevatedButton(
@@ -65,9 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700], // Background color
-                    padding: EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style: TextStyle(
                       fontSize: 18,
@@ -76,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Login with Google Button
                 ElevatedButton(
@@ -86,9 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         Colors.green[700], // Same green color as Login button
-                    padding: EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Login with Google',
                     style: TextStyle(
                       fontSize: 18,
@@ -97,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Create Account Button
                 TextButton(

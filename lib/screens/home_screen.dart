@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'qr_scanner_page.dart'; // Import the QR Scanner Page
+import 'map_screen.dart'; // Import the MapScreen
+import 'charge_screen.dart'; // Import the ChargeScreen
+import 'profile_screen.dart'; // Import the ProfileScreen
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -12,6 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
   late Timer _timer;
 
+  // Track the current index for the bottom navigation bar
+  int _currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -19,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _startAutoSlide() {
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       if (_currentPage < 3) {
         _currentPage++;
       } else {
@@ -28,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       _pageController.animateToPage(
         _currentPage,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeIn,
       );
     });
@@ -41,6 +49,38 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex =
+          index; // Update the current index for the bottom navigation bar
+    });
+
+    // Navigate to the respective screen based on the selected index
+    switch (index) {
+      case 0: // Home
+        // Do nothing as we are already on Home
+        break;
+      case 1: // Map
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MapScreen()),
+        );
+        break;
+      case 2: // Charge
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ChargeScreen()),
+        );
+        break;
+      case 3: // Profile
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfileScreen()),
+        );
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,16 +89,15 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-                height: 40), // To add some space from the top of the screen
+            const SizedBox(height: 40),
             Row(
               children: [
                 Image.asset(
                   'assets/icons/app_icon.png', // Replace with your app logo path
                   height: 50,
                 ),
-                SizedBox(width: 8),
-                Text(
+                const SizedBox(width: 8),
+                const Text(
                   'Hello, RexZeal',
                   style: TextStyle(
                     fontSize: 24,
@@ -67,17 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               'Welcome to PowerPark Plus',
-              style: TextStyle(
-                fontSize: 18,
-              ),
+              style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 20),
-            Container(
-              height: MediaQuery.of(context).size.width *
-                  0.5, // Set the height to 50% of the width
+            const SizedBox(height: 20),
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.5,
               child: Stack(
                 children: [
                   PageView(
@@ -103,11 +139,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         dotsCount: 4,
                         position: _currentPage,
                         decorator: DotsDecorator(
-                          color: Colors.grey, // Inactive dot color
-                          activeColor: Colors.blue, // Active dot color
-                          size: Size(8, 8),
-                          activeSize: Size(12, 8),
-                          spacing: EdgeInsets.symmetric(horizontal: 4),
+                          color: Colors.grey,
+                          activeColor: Colors.blue,
+                          size: const Size(8, 8),
+                          activeSize: const Size(12, 8),
+                          spacing: const EdgeInsets.symmetric(horizontal: 4),
                         ),
                       ),
                     ),
@@ -115,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -125,20 +161,17 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green[700], // Green 700 color
+                  color: Colors.green[700],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Charge your EV',
-                      style: TextStyle(
-                        fontSize: 23,
-                        color: Colors.white,
-                      ),
+                      style: TextStyle(fontSize: 23, color: Colors.white),
                     ),
                     Image.asset(
                       'assets/icons/scan_icon.png', // Replace with your icon path
@@ -152,6 +185,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 35),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map, size: 35),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bolt, size: 35),
+            label: 'Charge',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 35),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 
@@ -164,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -184,7 +243,8 @@ class DotsIndicator extends StatelessWidget {
   final int position;
   final DotsDecorator decorator;
 
-  DotsIndicator({
+  const DotsIndicator({
+    super.key,
     required this.dotsCount,
     required this.position,
     required this.decorator,
