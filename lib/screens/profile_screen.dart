@@ -63,26 +63,101 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            // Name
-            const Text(
-              'Name: RexZeal',
-              style: TextStyle(fontSize: 20),
+
+            // Profile Details
+            Container(
+              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.person, color: Colors.green[700]), // Icon for name
+                  const SizedBox(width: 10),
+                  const Text(
+                    'RexZeal',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            // Email
-            const Text(
-              'Email: rexzeal@powerpark.com',
-              style: TextStyle(fontSize: 20),
+
+            Container(
+              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.email, color: Colors.green[700]), // Icon for email
+                  const SizedBox(width: 10),
+                  const Text(
+                    'rexzeal@powerpark.com',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            // Vehicle Number
-            const Text(
-              'Vehicle Number: ABC1234',
-              style: TextStyle(fontSize: 20),
+
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.directions_car,
+                      color: Colors.green[700]), // Icon for vehicle number
+                  const SizedBox(width: 10),
+                  const Text(
+                    'Vehicle Number: ABC1234',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const Spacer(),
+
             // Edit Profile Button
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () {
                 // Add edit profile functionality here
               },
@@ -90,14 +165,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.green[700], // Customize button color
                 padding: const EdgeInsets.symmetric(vertical: 15),
               ),
-              child: const Text(
+              icon: const Icon(Icons.edit, color: Colors.white), // Edit icon
+              label: const Text(
                 'Edit Profile',
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
-            const SizedBox(height: 10),
+            const Spacer(),
+
             // Logout Button
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -109,10 +186,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Colors.red, // Customize button color for logout
                 padding: const EdgeInsets.symmetric(vertical: 15),
               ),
-              child: const Text(
+              icon:
+                  const Icon(Icons.logout, color: Colors.white), // Logout icon
+              label: const Text(
                 'Logout',
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
+            ),
+            const SizedBox(height: 20),
+
+            // Terms and Conditions Link
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.article,
+                    color: Colors.green), // Suitable icon for terms
+                TextButton(
+                  onPressed: () {
+                    // Add functionality to show terms and conditions
+                  },
+                  child: const Text(
+                    'Terms and Conditions',
+                    style: TextStyle(
+                      color: Colors.green, // Text color for the link
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
