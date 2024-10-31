@@ -5,6 +5,58 @@ import 'map_screen.dart'; // Import the MapScreen
 import 'charge_screen.dart'; // Import the ChargeScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 
+class DotsDecorator {
+  final Color color;
+  final Color activeColor;
+  final Size size;
+  final Size activeSize;
+  final EdgeInsetsGeometry spacing;
+
+  DotsDecorator({
+    required this.color,
+    required this.activeColor,
+    required this.size,
+    required this.activeSize,
+    required this.spacing,
+  });
+}
+
+class DotsIndicator extends StatelessWidget {
+  final int dotsCount;
+  final int position;
+  final DotsDecorator decorator;
+
+  const DotsIndicator({
+    super.key,
+    required this.dotsCount,
+    required this.position,
+    required this.decorator,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(
+        dotsCount,
+        (index) => Container(
+          margin: decorator.spacing,
+          width: index == position
+              ? decorator.activeSize.width
+              : decorator.size.width,
+          height: index == position
+              ? decorator.activeSize.height
+              : decorator.size.height,
+          decoration: BoxDecoration(
+            color: index == position ? decorator.activeColor : decorator.color,
+            shape: BoxShape.circle,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -20,10 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
   // Track the current index for the bottom navigation bar
   int _currentIndex = 0;
 
+  // Automatic greeting variable
+  String _greeting = '';
+  IconData _greetingIcon = Icons.wb_sunny; // Default icon
+
   @override
   void initState() {
     super.initState();
     _startAutoSlide();
+    _setGreeting(); // Set the greeting based on the current time
   }
 
   void _startAutoSlide() {
@@ -40,6 +97,21 @@ class _HomeScreenState extends State<HomeScreen> {
         curve: Curves.easeIn,
       );
     });
+  }
+
+  void _setGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      _greeting = 'Good Morning';
+      _greetingIcon = Icons.wb_sunny; // Morning icon
+    } else if (hour < 18) {
+      _greeting = 'Good Afternoon';
+      _greetingIcon = Icons.wb_sunny; // Afternoon icon
+    } else {
+      _greeting = 'Good Evening';
+      _greetingIcon = Icons.nights_stay; // Evening icon
+    }
+    setState(() {}); // Trigger a rebuild to update the icon
   }
 
   @override
@@ -97,19 +169,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 50,
                 ),
                 const SizedBox(width: 8),
-                const Text(
-                  'Hello, RexZeal',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hello, RexZeal',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          _greetingIcon,
+                          color: _greetingIcon == Icons.wb_sunny
+                              ? Colors.yellow
+                              : Colors.blueGrey,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          _greeting,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Welcome to PowerPark Plus',
-              style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
             SizedBox(
@@ -236,56 +328,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class DotsIndicator extends StatelessWidget {
-  final int dotsCount;
-  final int position;
-  final DotsDecorator decorator;
-
-  const DotsIndicator({
-    super.key,
-    required this.dotsCount,
-    required this.position,
-    required this.decorator,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(
-        dotsCount,
-        (index) => Container(
-          margin: decorator.spacing,
-          width: index == position
-              ? decorator.activeSize.width
-              : decorator.size.width,
-          height: index == position
-              ? decorator.activeSize.height
-              : decorator.size.height,
-          decoration: BoxDecoration(
-            color: index == position ? decorator.activeColor : decorator.color,
-            shape: BoxShape.circle,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DotsDecorator {
-  final Color color;
-  final Color activeColor;
-  final Size size;
-  final Size activeSize;
-  final EdgeInsetsGeometry spacing;
-
-  DotsDecorator({
-    required this.color,
-    required this.activeColor,
-    required this.size,
-    required this.activeSize,
-    required this.spacing,
-  });
 }
