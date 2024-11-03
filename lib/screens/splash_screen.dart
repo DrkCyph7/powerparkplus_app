@@ -1,5 +1,5 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+import 'dart:async'; // Imports the 'dart:async' library to use the Timer class
+import 'package:flutter/material.dart'; // Imports the Flutter material design library
 import 'onboarding_screen.dart'; // Import the OnboardingScreen
 
 class SplashScreen extends StatefulWidget {

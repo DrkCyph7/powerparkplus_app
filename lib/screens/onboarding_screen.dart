@@ -50,7 +50,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: <Widget>[
               _buildPage(
                 'assets/images/slide2.png',
-                'Experience the best and the fastest ev chargers with maximum freedom and comfort.',
+                'Find nearby EV chargers with ease.',
                 textPositionFromBottom: 100.0, // First image: move text up
               ),
               _buildPage(
@@ -61,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               _buildPage(
                 'assets/images/slide4.png',
-                'Find nearby EV chargers with ease.',
+                'Experience the best and the fastest ev chargers with maximum freedom and comfort.',
                 textPositionFromBottom: 100.0, // Third image: move text up
               ),
             ],
